@@ -1,0 +1,82 @@
+<main class="dark:bg-gray-800 bg-white relative overflow-hidden min-h-screen">
+  <!-- HEADER -->
+  <header class="h-24 sm:h-32 flex items-center z-30 w-full animate__animated animate__fadeInDown">
+    <div class="container mx-auto px-6 flex items-center justify-between">
+      <div class="uppercase text-gray-800 dark:text-white font-black text-3xl">
+        Gestiona Taxi
+      </div>
+
+      <div class="flex items-center ">
+        <nav class="font-sen text-gray-800 dark:text-white uppercase text-lg lg:flex items-center hidden">
+          <a href="#inicio" class="py-2 px-6 flex">Inicio</a>
+          <a href="#demo" class="py-2 px-6 flex">Demo</a>
+          <a href="#funciones" class="py-2 px-6 flex">Funciones</a>
+          <a href="/files/gestiona_taxi_2025.apk" class="py-2 px-6 flex">Descargar</a>
+          <a href="#contacto" class="py-2 px-6 flex">Contacto</a>
+        </nav>
+
+        <button class="lg:hidden flex flex-col ml-4" aria-label="Abrir menú">
+          <span class="w-6 h-1 bg-gray-800 dark:bg-white mb-1"></span>
+          <span class="w-6 h-1 bg-gray-800 dark:bg-white mb-1"></span>
+          <span class="w-6 h-1 bg-gray-800 dark:bg-white mb-1"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div id="inicio" class="bg-white dark:bg-gray-800 relative z-20 overflow-hidden">
+    <div class="container mx-auto px-6 py-10 flex flex-col-reverse lg:flex-row items-center gap-10">
+
+      <!-- Texto -->
+      <div class="w-full lg:w-2/5 animate__animated animate__lightSpeedInLeft">
+        <span class="w-20 h-2 bg-gray-800 dark:bg-white mb-6 block"></span>
+
+        <h1
+          class="font-bebas-neue uppercase text-4xl sm:text-5xl lg:text-6xl font-black leading-tight dark:text-white text-gray-800">
+          Tu taxi, bajo control.
+        </h1>
+
+        <p class="mt-4 text-sm sm:text-base text-gray-700 dark:text-gray-200">
+          Registra servicios, separa <strong>efectivo y tarjeta</strong>, calcula <strong>comisiones para asalariados y
+            gastos</strong>,
+          y genera <strong>resúmenes mensuales y comisiones en PDF imprimibles</strong>. Funciona <strong>sin
+            conexión</strong> y tus datos quedan
+          <strong>solo en tu móvil</strong>.
+        </p>
+
+        <div class="flex flex-wrap items-center gap-3 mt-6">
+          <a href="https://github.com/meydodev/Gestiona-Taxi-2025-APK/releases/download/v1.0.0/gestiona-taxi-2025.apk"
+            class="uppercase py-2 px-5 rounded-lg bg-amber-500 border-2 border-transparent text-white text-md hover:bg-amber-400">
+            Descargar APK
+          </a>
+        </div>
+
+        <p class="mt-3 text-xs text-gray-500 dark:text-gray-300">
+          Datos locales (privacidad) • Android 8+
+        </p>
+
+        <!-- Cards -->
+        <div class="mt-6 grid grid-cols-2 gap-4 max-w-sm">
+          <a href="#"
+            class="p-4 bg-white border-2 border-black rounded-2xl shadow-sm dark:bg-gray-800 dark:border-gray-700 text-center">
+            <h5 class="text-lg font-bold text-gray-900 dark:text-white">Valoraciones</h5>
+            <p class="text-sm text-gray-700 dark:text-gray-400">Media 4,8/5</p>
+          </a>
+
+          <a href="#"
+            class="p-4 bg-white border-2 border-black rounded-2xl shadow-sm dark:bg-gray-800 dark:border-gray-700 text-center">
+            <h5 class="text-lg font-bold text-gray-900 dark:text-white">Descargas</h5>
+            <p class="text-sm text-gray-700 dark:text-gray-400">1.2k+ APK</p>
+          </a>
+        </div>
+      </div>
+
+      <!-- Imagen -->
+      <div class="w-full lg:w-3/5 flex justify-center animate__animated animate__flipInY animate__delay-1s">
+        <img src="assets/img/captura_hero.png" alt="Pantalla principal de Gestiona Taxi 2025"
+          class="w-40 sm:w-56 md:w-64 lg:w-[290px] border-8 border-black rounded-3xl shadow-xl" />
+      </div>
+    </div>
+  </div>
+</main>
