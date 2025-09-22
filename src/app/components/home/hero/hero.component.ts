@@ -9,4 +9,10 @@ import { Component } from '@angular/core';
 })
 export class HeroComponent {
 
+  counterDownload = 0;
+
+  downloadApp() {
+    this.counterDownload++;
+    console.log(`App downloaded ${this.counterDownload} times`);
+  }
 }

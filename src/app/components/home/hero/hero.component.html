@@ -11,10 +11,9 @@
           <a href="#inicio" class="py-2 px-6 flex">Inicio</a>
           <a href="#demo" class="py-2 px-6 flex">Demo</a>
           <a href="#funciones" class="py-2 px-6 flex">Funciones</a>
-          <a href="/files/gestiona_taxi_2025.apk" class="py-2 px-6 flex">Descargar</a>
-          <a href="#contacto" class="py-2 px-6 flex">Contacto</a>
+          <a href="/files/gestiona_taxi_2025.apk" class="py-2 px-6 flex">Valoraciones</a>
+          <a href="#contact" class="py-2 px-6 flex">Contacto</a>
         </nav>
-
         <button class="lg:hidden flex flex-col ml-4" aria-label="Abrir menú">
           <span class="w-6 h-1 bg-gray-800 dark:bg-white mb-1"></span>
           <span class="w-6 h-1 bg-gray-800 dark:bg-white mb-1"></span>
@@ -40,7 +39,7 @@
         <p class="mt-4 text-sm sm:text-base text-gray-700 dark:text-gray-200">
           Registra servicios, separa <strong>efectivo y tarjeta</strong>, calcula <strong>comisiones para asalariados y
             gastos</strong>,
-          y genera <strong>resúmenes mensuales y comisiones en PDF imprimibles</strong>. Funciona <strong>sin
+           genera <strong>resúmenes mensuales y comisiones en PDF imprimibles</strong>. Funciona <strong>sin
             conexión</strong> y tus datos quedan
           <strong>solo en tu móvil</strong>.
         </p>
@@ -48,7 +47,7 @@
         <div class="flex flex-wrap items-center gap-3 mt-6">
           <a href="https://github.com/meydodev/Gestiona-Taxi-2025-APK/releases/download/v1.0.0/gestiona-taxi-2025.apk"
             class="uppercase py-2 px-5 rounded-lg bg-amber-500 border-2 border-transparent text-white text-md hover:bg-amber-400">
-            Descargar APK
+            <span class="bi bi-android" (click)="downloadApp()">  Descargar APK</span>
           </a>
         </div>
 
@@ -67,7 +66,7 @@
           <a href="#"
             class="p-4 bg-white border-2 border-black rounded-2xl shadow-sm dark:bg-gray-800 dark:border-gray-700 text-center">
             <h5 class="text-lg font-bold text-gray-900 dark:text-white">Descargas</h5>
-            <p class="text-sm text-gray-700 dark:text-gray-400">1.2k+ APK</p>
+            <p class="text-sm text-gray-700 dark:text-gray-400">{{ counterDownload }} descargas</p>
           </a>
         </div>
       </div>
