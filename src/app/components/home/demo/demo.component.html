@@ -1,0 +1,22 @@
+<section class="max-w-4xl mx-auto px-4 sm:px-6 py-8" id="demo">
+  <div class="mb-6 text-gray-500">
+    <h2 class="text-3xl sm:text-3xl font-extrabold text-gray-800 dark:text-gray-500">Demo</h2>
+  </div>
+
+  <figure class="rounded-2xl overflow-hidden shadow-xl ring-1 ring-black/5 bg-black">
+    <!-- Para mantener 16:9 y que los controles no rompan el layout, usamos wrapper -->
+    <div class="relative w-full aspect-[16/9]">
+      <video
+        class="absolute inset-0 h-full w-full"
+        [autoplay]="true"
+        [muted]="true"
+        [loop]="true"
+        [controls]="true"
+        playsinline>
+        <source src="../../../../assets/video/video_gestiona_taxi_2025.mp4" type="video/mp4">
+        <track kind="captions" srclang="es" label="Español" default>
+        Tu navegador no soporta la etiqueta de video.
+      </video>
+    </div>
+  </figure>
+</section>

@@ -3,7 +3,7 @@
     class="grid sm:grid-cols-2 items-center gap-16 p-8 mx-auto max-w-4xl bg-white shadow-[0_2px_10px_-3px_rgba(6,81,237,0.3)] rounded-md text-[#333] font-[sans-serif]">
     <!-- Columna izquierda -->
     <div>
-      <h1 class="text-3xl font-extrabold">Hablemos</h1>
+      <h1 class="text-3xl font-extrabold text-gray-800 dark:text-gray-500">Hablemos</h1>
       <p class="text-sm text-gray-500 mt-3">
         ¿Tienes una gran idea que pueda ayudar a mejorar la aplicación? Entonces contáctame,
         me encantaría conocerla y brindarte apoyo.
@@ -34,11 +34,10 @@
         <h2 class="text-lg font-extrabold">Redes sociales</h2>
         <ul class="flex mt-3 space-x-4">
           <li class="bg-[#e6e6e6cf] h-10 w-10 rounded-full flex items-center justify-center shrink-0">
-            <a href="javascript:void(0)" aria-label="Facebook">
+            <a href="https://www.facebook.com/abraham.mellado.56" target="_blank" aria-label="Facebook">
               <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="#ffa400" viewBox="0 0 24 24"
                 aria-hidden="true">
                 <path
-
                   d="M6.812 13.937H9.33v9.312c0 .414.335.75.75.75l4.007.001a.75.75 0 0 0 .75-.75v-9.312h2.387a.75.75 0 0 0 .744-.657l.498-4a.75.75 0 0 0-.744-.843h-2.885c.113-2.471-.435-3.202 1.172-3.202 1.088-.13 2.804.421 2.804-.75V.909a.75.75 0 0 0-.648-.743A26.926 26.926 0 0 0 15.071 0c-7.01 0-5.567 7.772-5.74 8.437H6.812a.75.75 0 0 0-.75.75v4c0 .414.336.75.75.75z">
                 </path>
               </svg>
@@ -46,7 +45,7 @@
           </li>
 
           <li class="bg-[#e6e6e6cf] h-10 w-10 rounded-full flex items-center justify-center shrink-0">
-            <a href="javascript:void(0)" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/abraham-mellado-065a24233" aria-label="LinkedIn" target="_blank">
               <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="#ffa400" viewBox="0 0 511 512"
                 aria-hidden="true">
                 <path
@@ -57,7 +56,7 @@
           </li>
 
           <li class="bg-[#e6e6e6cf] h-10 w-10 rounded-full flex items-center justify-center shrink-0">
-            <a href="javascript:void(0)" aria-label="Instagram">
+            <a href="https://www.instagram.com/meydo89/" target="_blank" aria-label="Instagram">
               <svg xmlns="http://www.w3.org/2000/svg" width="20px" height="20px" fill="#ffa400" viewBox="0 0 24 24"
                 aria-hidden="true">
                 <path
@@ -74,7 +73,7 @@
       <label class="block">
         <span class="sr-only">Asunto</span>
         <input type="text" placeholder="Asunto" name="subject" [(ngModel)]="asunto" #subject="ngModel" required
-          class="w-full rounded-md py-2.5 px-4 border text-sm outline-amber-500" />
+          class="w-full rounded-md py-2.5 px-4 border-gray-300 border text-sm outline-amber-500" />
 
         @if (subject.invalid && (subject.dirty || subject.touched)) {
         @if (subject.errors?.['required']) {
@@ -86,7 +85,7 @@
       <label class="block">
         <span class="sr-only">Mensaje</span>
         <textarea placeholder="Mensaje" name="message" [(ngModel)]="mensaje" #message="ngModel" required
-          class="w-full rounded-md py-2.5 px-4 border text-sm outline-amber-500">
+          class="w-full rounded-md py-2.5 border-gray-300 px-4 border text-sm outline-amber-500" rows="4">
     </textarea>
 
         @if (message.invalid && (message.dirty || message.touched)) {

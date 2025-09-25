@@ -6,15 +6,23 @@
         Gestiona Taxi
       </div>
 
-      <div class="flex items-center ">
+      <div class="flex items-center">
+        <!-- Menú escritorio -->
         <nav class="font-sen text-gray-800 dark:text-white uppercase text-lg lg:flex items-center hidden">
-          <a href="#inicio" class="py-2 px-6 flex">Inicio</a>
-          <a href="#demo" class="py-2 px-6 flex">Demo</a>
-          <a href="#funciones" class="py-2 px-6 flex">Funciones</a>
-          <a href="/files/gestiona_taxi_2025.apk" class="py-2 px-6 flex">Valoraciones</a>
-          <a href="#contact" class="py-2 px-6 flex">Contacto</a>
+          <a
+            class="inline-block py-2 px-4 font-semibold transition-transform transition-colors duration-150 hover:scale-105 hover:text-amber-500">Inicio</a>
+          <a class="inline-block py-2 px-4 font-semibold transition-transform transition-colors duration-150 hover:scale-105 hover:text-amber-500"
+            href="#demo">Demo</a>
+          <a class="inline-block py-2 px-4 font-semibold transition-transform transition-colors duration-150 hover:scale-105 hover:text-amber-500"
+            href="#funciones">Manual</a>
+          <a class="inline-block py-2 px-4 font-semibold transition-transform transition-colors duration-150 hover:scale-105 hover:text-amber-500"
+            href="#reviews">Valoraciones</a>
+          <a class="inline-block py-2 px-4 font-semibold transition-transform transition-colors duration-150 hover:scale-105 hover:text-amber-500"
+            href="#contact">Contacto</a>
         </nav>
-        <button class="lg:hidden flex flex-col ml-4" aria-label="Abrir menú">
+
+        <!-- Botón hamburguesa -->
+        <button class="lg:hidden flex flex-col ml-4" aria-label="Abrir menú" (click)="toggleMenu()">
           <span class="w-6 h-1 bg-gray-800 dark:bg-white mb-1"></span>
           <span class="w-6 h-1 bg-gray-800 dark:bg-white mb-1"></span>
           <span class="w-6 h-1 bg-gray-800 dark:bg-white mb-1"></span>
@@ -22,6 +30,16 @@
       </div>
     </div>
   </header>
+
+  <!-- Menú móvil -->
+  <nav *ngIf="isMenuOpen"
+    class="lg:hidden bg-white dark:bg-gray-800 px-6 py-4 space-y-2 font-sen text-gray-800 dark:text-white uppercase text-lg animate__animated animate__fadeInDown">
+    <a class="block py-2 px-4 font-semibold hover:text-amber-500">Inicio</a>
+    <a class="block py-2 px-4 font-semibold hover:text-amber-500" href="#demo">Demo</a>
+    <a class="block py-2 px-4 font-semibold hover:text-amber-500" href="#funciones">Manual</a>
+    <a class="block py-2 px-4 font-semibold hover:text-amber-500" href="#reviews">Valoraciones</a>
+    <a class="block py-2 px-4 font-semibold hover:text-amber-500" href="#contact">Contacto</a>
+  </nav>
 
   <!-- HERO -->
   <div id="inicio" class="bg-white dark:bg-gray-800 relative z-20 overflow-hidden">
@@ -35,11 +53,10 @@
           class="font-bebas-neue uppercase text-4xl sm:text-5xl lg:text-6xl font-black leading-tight dark:text-white text-gray-800">
           Tu taxi, bajo control.
         </h1>
-
         <p class="mt-4 text-sm sm:text-base text-gray-700 dark:text-gray-200">
           Registra servicios, separa <strong>efectivo y tarjeta</strong>, calcula <strong>comisiones para asalariados y
             gastos</strong>,
-           genera <strong>resúmenes mensuales y comisiones en PDF imprimibles</strong>. Funciona <strong>sin
+          genera <strong>resúmenes mensuales y comisiones en PDF imprimibles</strong>. Funciona <strong>sin
             conexión</strong> y tus datos quedan
           <strong>solo en tu móvil</strong>.
         </p>
@@ -47,7 +64,7 @@
         <div class="flex flex-wrap items-center gap-3 mt-6">
           <a href="https://github.com/meydodev/Gestiona-Taxi-2025-APK/releases/download/v1.0.0/gestiona-taxi-2025.apk"
             class="uppercase py-2 px-5 rounded-lg bg-amber-500 border-2 border-transparent text-white text-md hover:bg-amber-400">
-            <span class="bi bi-android" (click)="downloadApp()">  Descargar APK</span>
+            <span class="bi bi-android" (click)="addCounterDownloadApk()"> Descargar APK</span>
           </a>
         </div>
 
@@ -60,13 +77,20 @@
           <a href="#"
             class="p-4 bg-white border-2 border-black rounded-2xl shadow-sm dark:bg-gray-800 dark:border-gray-700 text-center">
             <h5 class="text-lg font-bold text-gray-900 dark:text-white">Valoraciones</h5>
-            <p class="text-sm text-gray-700 dark:text-gray-400">Media 4,8/5</p>
+
+            <p *ngIf="stats" class="text-sm text-gray-700 dark:text-gray-400">
+              Media {{ stats.average | number:'1.1-1' }}/5
+            </p>
+            <p *ngIf="!stats" class="text-sm text-gray-400 italic">
+              Cargando...
+            </p>
           </a>
+
 
           <a href="#"
             class="p-4 bg-white border-2 border-black rounded-2xl shadow-sm dark:bg-gray-800 dark:border-gray-700 text-center">
             <h5 class="text-lg font-bold text-gray-900 dark:text-white">Descargas</h5>
-            <p class="text-sm text-gray-700 dark:text-gray-400">{{ counterDownload }} descargas</p>
+            <p class="text-sm text-gray-700 dark:text-gray-400">{{ counter$ | async }} descargas</p>
           </a>
         </div>
       </div>

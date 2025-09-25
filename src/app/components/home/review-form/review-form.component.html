@@ -1,68 +1,95 @@
-<div class="p-4 mx-auto bg-white rounded-lg shadow-md max-w-4xl sm:p-6 grid grid-cols-1 lg:grid-cols-6 gap-6">
+<div class="p-4 mx-auto bg-white rounded-lg shadow-md max-w-4xl sm:p-6 grid grid-cols-1 lg:grid-cols-6 gap-6"
+  id="reviews">
   <div class="lg:col-span-4 col-span-1">
-    <form action="" method="POST" class="space-y-4">
-      <h2 class="text-2xl font-semibold text-gray-700 mb-4">
-        Escribe tu valoración
-      </h2>
-      <div class="flex justify-start items-center space-x-1 mb-4">
-        <input type="radio" id="5-stars" name="rating" value="5" class="hidden">
-        <label for="5-stars" class="text-yellow-400 text-2xl cursor-pointer hover:scale-110">★</label>
-        <input type="radio" id="4-stars" name="rating" value="4" class="hidden">
-        <label for="4-stars" class="text-yellow-400 text-2xl cursor-pointer hover:scale-110">★</label>
-        <input type="radio" id="3-stars" name="rating" value="3" class="hidden">
-        <label for="3-stars" class="text-yellow-400 text-2xl cursor-pointer hover:scale-110">★</label>
-        <input type="radio" id="2-stars" name="rating" value="2" class="hidden">
-        <label for="2-stars" class="text-yellow-400 text-2xl cursor-pointer hover:scale-110">★</label>
-        <input type="radio" id="1-star" name="rating" value="1" class="hidden">
-        <label for="1-star" class="text-yellow-400 text-2xl cursor-pointer hover:scale-110">★</label>
+    <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()" class="space-y-4">
+      <h2 class="text-3xl font-extrabold text-gray-800 dark:text-gray-500 mb-4">Valoraciones</h2>
+
+      <!-- Estrellas seleccionables -->
+      <div class="flex items-center gap-1 mb-4 select-none">
+        <!-- input oculto para mantener accesibilidad/submit del form -->
+        <input type="hidden" formControlName="rating" />
+
+        <button *ngFor="let star of stars" type="button"
+          class="text-2xl leading-none cursor-pointer transition-transform hover:scale-110 focus:outline-none"
+          (mouseenter)="hovered = star" (mouseleave)="hovered = 0" (click)="setRating(star)"
+          [class.text-yellow-400]="star <= (hovered || reviewForm.value.rating || 0)"
+          [class.text-gray-300]="star > (hovered || reviewForm.value.rating || 0)">
+          ★
+        </button>
       </div>
-      <textarea id="review" name="review" rows="4" required="true" class="block w-full p-3 text-sm text-gray-900 bg-gray-50 rounded-md border border-gray-300 focus:ring-blue-500 focus:border-blue-500" placeholder="Write your review"></textarea>
+
+      <!-- Reseña -->
+      <textarea formControlName="review" rows="4" class="block w-full p-3 text-sm text-gray-900 bg-gray-50 rounded-md border border-gray-300
+         focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500
+         focus:bg-amber-50 caret-amber-500"></textarea>
+
       <div class="text-right py-4">
-        <a href="/user"
-          class="text-white bg-amber-500 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-3">Subir Reseña</a>
+        <button type="submit" [disabled]="reviewForm.invalid" [attr.aria-disabled]="reviewForm.invalid" class="text-white bg-amber-500 hover:bg-amber-400 focus:ring-4 focus:outline-none
+             focus:ring-blue-300 font-semibold rounded-lg text-sm px-5 py-3
+             disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-amber-500">
+          Publicar
+        </button>
       </div>
     </form>
   </div>
-  <div class="lg:col-span-2 hidden lg:flex flex-col space-y-4">
+  <div class="lg:col-span-2 hidden lg:flex flex-col space-y-4" *ngIf="stats">
     <div class="flex items-center">
       <span class="text-yellow-400 text-xl">★★★★★</span>
-      <p class="ml-2 text-sm font-medium text-gray-900">0 out of 0</p>
+      <p class="ml-2 text-sm font-medium text-gray-900">
+        {{ stats.average | number:'1.1-1' }} de {{ stats.total }}
+      </p>
     </div>
-    <p class="text-sm font-medium text-gray-500">0 global ratings</p>
-    <div class="flex items-center mt-2">
-      <span class="text-sm font-medium text-blue-600 hover:underline shrink-0">5 star</span>
+    <p class="text-sm font-medium text-gray-500">{{ stats.total }} valoraciones globales</p>
+
+    <div *ngFor="let star of [5,4,3,2,1]" class="flex items-center">
+      <span class="text-sm font-medium text-blue-600 hover:underline shrink-0">{{ star }} estrellas</span>
       <div class="w-3/4 h-4 mx-2 bg-gray-200 rounded">
-        <div class="h-4 bg-yellow-400 rounded" style="width: 50%"></div>
+        <div class="h-4 bg-yellow-400 rounded" [style.width.%]="stats.breakdown[star]">
+        </div>
       </div>
-      <span class="text-sm font-medium text-gray-500">0%</span>
-    </div>
-    <div class="flex items-center">
-      <span class="text-sm font-medium text-blue-600 hover:underline shrink-0">4 star</span>
-      <div class="w-3/4 h-4 mx-2 bg-gray-200 rounded">
-        <div class="h-4 bg-yellow-400 rounded" style="width: 25%"></div>
-      </div>
-      <span class="text-sm font-medium text-gray-500">0%</span>
-    </div>
-    <div class="flex items-center">
-      <span class="text-sm font-medium text-blue-600 hover:underline shrink-0">3 star</span>
-      <div class="w-3/4 h-4 mx-2 bg-gray-200 rounded">
-        <div class="h-4 bg-yellow-400 rounded" style="width: 10%"></div>
-      </div>
-      <span class="text-sm font-medium text-gray-500">0%</span>
-    </div>
-    <div class="flex items-center">
-      <span class="text-sm font-medium text-blue-600 hover:underline shrink-0">2 star</span>
-      <div class="w-3/4 h-4 mx-2 bg-gray-200 rounded">
-        <div class="h-4 bg-yellow-400 rounded" style="width: 5%"></div>
-      </div>
-      <span class="text-sm font-medium text-gray-500">0%</span>
-    </div>
-    <div class="flex items-center">
-      <span class="text-sm font-medium text-blue-600 hover:underline shrink-0">2 star</span>
-      <div class="w-3/4 h-4 mx-2 bg-gray-200 rounded">
-        <div class="h-4 bg-yellow-400 rounded" style="width: 10%"></div>
-      </div>
-      <span class="text-sm font-medium text-gray-500">0%</span>
+      <span class="text-sm font-medium text-gray-500">{{ stats.breakdown[star] }}%</span>
     </div>
   </div>
+</div>
+<!-- LISTADO DE RESEÑAS -->
+<div class="mt-8 mx-auto max-w-4xl">
+  <h3 class="text-3xl font-bold text-gray-800 dark:text-gray-200 mb-6">
+    Opiniones de usuarios
+  </h3>
+
+  <!-- Si no hay reseñas -->
+  <div *ngIf="reviews.length === 0" class="text-1xl font-semibold text-gray-400 dark:text-gray-500 mb-14">
+    Aún no hay reseñas. ¡Sé el primero en opinar!
+  </div>
+
+  <!-- Grid de reseñas -->
+  <div *ngIf="reviews.length > 0" class="grid gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+    <div *ngFor="let r of reviews"
+      class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-md hover:shadow-lg transition-all">
+      <!-- Estrellas -->
+      <div class="flex items-center mb-3">
+        <ng-container *ngFor="let star of [1,2,3,4,5]">
+          <span class="text-lg" [class.text-yellow-400]="star <= r.rating" [class.text-gray-300]="star > r.rating">
+            ★
+          </span>
+        </ng-container>
+      </div>
+
+      <!-- Texto de reseña -->
+      <p class="text-gray-700 dark:text-gray-300 text-sm leading-relaxed mb-4">
+        {{ r.review }}
+      </p>
+    </div>
+  </div>
+</div>
+<div class="flex justify-center mt-6" *ngIf="hasMore">
+  <button (click)="loadPage()" [disabled]="loadingMore" class="px-5 py-2
+              disabled:opacity-50 disabled:cursor-not-allowed">
+    {{ loadingMore ? 'Cargando…' : 'Cargar más' }}
+  </button>
+</div>
+<div class="mx-auto max-w-4xl">
+  <p class="text-center text-sm text-gray-500 mt-3" *ngIf="!hasMore && reviews.length > 0">
+    No hay más reseñas.
+  </p>
 </div>
