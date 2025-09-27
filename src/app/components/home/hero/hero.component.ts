@@ -5,6 +5,7 @@ import { selectCounterValue, selectLoading } from '../../../store/downloadsCount
 import { Observable } from 'rxjs';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { HomeService, ReviewStats } from '../../../services/home.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'hero',
@@ -33,7 +34,15 @@ export class HeroComponent implements OnInit {
   }
 
   addCounterDownloadApk(): void {
-    this.store.dispatch(incrementCounter());
+  this.store.dispatch(incrementCounter());
+    Swal.fire({
+        title: "Importante",
+        text: "Activa 'Orígenes desconocidos' para instalar y vuelve a desactivar después por seguridad.",
+        icon: "success",
+        confirmButtonColor: '#f59e0b',
+
+      });
+
   }
 
   loadStats(): void {

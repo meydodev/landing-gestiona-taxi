@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
 import { HomeService, ReviewStats } from '../../../services/home.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'review-form',
@@ -69,7 +70,6 @@ export class ReviewFormComponent implements OnInit {
       this.reviewForm.markAllAsTouched();
       return;
     }
-
     this.loading = true;
     this.serverError = '';
 
@@ -82,10 +82,22 @@ export class ReviewFormComponent implements OnInit {
           this.getStats();        // refrescar stats
           this.loadPage(true);    // recargar página 1
           this.reviewsSvc.triggerRefresh();
+          Swal.fire({
+            title: 'Gracias por tu reseña',
+            text: '¡Agradecemos tu tiempo y opinión!',
+            icon: 'success',
+            confirmButtonColor: '#f59e0b',
+          });
         },
         error: (err) => {
           this.serverError = err?.error?.message ?? 'No se pudo enviar la reseña.';
           console.error('Error al guardar la reseña:', err);
+          Swal.fire({
+            title: 'Error',
+            text: this.serverError,
+            icon: 'error',
+            confirmButtonColor: '#f59e0b',
+          });
         },
       });
   }
