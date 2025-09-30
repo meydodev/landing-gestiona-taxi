@@ -42,7 +42,6 @@ export class HeroComponent implements OnInit {
           confirmButtonColor: '#f59e0b'
 
         });
-
       },
       error: (err) => {
         this.isLoading = false;
