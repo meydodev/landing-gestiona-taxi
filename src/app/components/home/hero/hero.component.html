@@ -1,5 +1,15 @@
 <main class="dark:bg-gray-800 bg-white relative overflow-hidden min-h-screen">
   <!-- HEADER -->
+
+  <!-- Loader Overlay -->
+<div *ngIf="isLoading" class="loader-overlay">
+  <div class="loader">
+    <div class="spinner"></div>
+    <p>Cargando…</p>
+  </div>
+</div>
+
+
   <header class="h-24 sm:h-32 flex items-center z-30 w-full animate__animated animate__fadeInDown">
     <div class="container mx-auto px-6 flex items-center justify-between">
       <div class="uppercase text-gray-800 dark:text-white font-black text-3xl">
@@ -82,15 +92,14 @@
               Media {{ stats.average | number:'1.1-1' }}/5
             </p>
             <p *ngIf="!stats" class="text-sm text-gray-400 italic">
-              Cargando...
-            </p>
+              Sin Valoraciones
           </a>
 
 
           <a href="#"
             class="p-4 bg-white border-2 border-black rounded-2xl shadow-sm dark:bg-gray-800 dark:border-gray-700 text-center">
             <h5 class="text-lg font-bold text-gray-900 dark:text-white">Descargas</h5>
-            <p class="text-sm text-gray-700 dark:text-gray-400">{{ counter$ | async }} descargas</p>
+            <p class="text-sm text-gray-700 dark:text-gray-400">{{ counterDownload }} descargas</p>
           </a>
         </div>
       </div>
