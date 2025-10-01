@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { DownloadCounter } from '../../../models/downlodas';
+import { DownloadCounter } from '../../../models/downlodas'; // 👈 corregido
 import { CommonModule } from '@angular/common';
 import { HomeService, ReviewStats } from '../../../services/home.service';
 import Swal from 'sweetalert2';
@@ -10,12 +10,13 @@ import Swal from 'sweetalert2';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './hero.component.html',
-  styleUrl: './hero.component.css'
+  styleUrls: ['./hero.component.css'] // 👈 corregido
 })
 export class HeroComponent implements OnInit {
   isMenuOpen = false;
-  counterDownload: number = 0;  // ⬅️ contador de descargas
-  isLoading = false;
+  counterDownload: number = 0;
+  isLoadingStats = false;
+  isLoadingDownload = false;
   stats: ReviewStats | null = null;
 
   constructor(private store: Store, private homeSvc: HomeService) {}
@@ -30,21 +31,20 @@ export class HeroComponent implements OnInit {
   }
 
   addCounterDownloadApk(): void {
-    this.isLoading = true;
+    this.isLoadingDownload = true;
     this.homeSvc.addDownloadCounter().subscribe({
       next: (s: DownloadCounter) => {
-        this.counterDownload = s.counterDownload;  // ⬅️ actualizar contador
-        console.log('Contador de descargas actualizado:', s);
+        this.counterDownload = s.counterDownload;
+        this.isLoadingDownload = false; // ✅ se apaga loader
         Swal.fire({
           title: "Importante",
           text: "Activa 'Orígenes desconocidos' para instalar y vuelve a desactivar después por seguridad.",
           icon: "success",
           confirmButtonColor: '#f59e0b'
-
         });
       },
       error: (err) => {
-        this.isLoading = false;
+        this.isLoadingDownload = false;
         console.error('Error al incrementar el contador de descargas', err);
         Swal.fire({
           title: "Error",
@@ -66,16 +66,16 @@ export class HeroComponent implements OnInit {
   }
 
   loadStats(): void {
-  this.isLoading = true; // activar loader antes de la petición
-  this.homeSvc.getReviewsStats().subscribe({
-    next: (s) => {
-      this.stats = s;          // guardar stats
-      this.isLoading = false;  // desactivar loader al terminar bien
-    },
-    error: (err) => {
-      console.error('Error al cargar estadísticas', err);
-      this.isLoading = false;  // desactivar loader también en error
-    }
-  });
-}
+    this.isLoadingStats = true;
+    this.homeSvc.getReviewsStats().subscribe({
+      next: (s) => {
+        this.stats = s;
+        this.isLoadingStats = false;
+      },
+      error: (err) => {
+        console.error('Error al cargar estadísticas', err);
+        this.isLoadingStats = false;
+      }
+    });
+  }
 }
