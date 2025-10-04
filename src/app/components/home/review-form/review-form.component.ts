@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { finalize } from 'rxjs/operators';
-import { HomeService, ReviewStats } from '../../../services/home.service';
+import { HomeService, ReviewStats } from '../../../core/services/home.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -106,7 +106,7 @@ export class ReviewFormComponent implements OnInit {
     this.reviewsSvc.getReviewsStats().subscribe({
       next: (s: ReviewStats) => {
         this.stats = s;
-        console.log('Estadísticas:', s);
+        //console.log('Estadísticas:', s);
       },
       error: (err) => {
         console.error('Error al obtener estadísticas:', err);

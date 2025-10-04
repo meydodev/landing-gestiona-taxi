@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { DownloadCounter } from '../../../models/downlodas'; // 👈 corregido
 import { CommonModule } from '@angular/common';
-import { HomeService, ReviewStats } from '../../../services/home.service';
+import { HomeService, ReviewStats } from '../../../core/services/home.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -57,11 +57,16 @@ export class HeroComponent implements OnInit {
   }
 
   loadCounterDownload(): void {
+    this.isLoadingDownload = true;
     this.homeSvc.getDownloadsCounter().subscribe({
       next: (s: DownloadCounter) => {
         this.counterDownload = s.counterDownload;
+        this.isLoadingDownload = false;
       },
-      error: (err) => console.error('Error al cargar el contador de descargas', err)
+      error: (err) => {
+        this.isLoadingDownload = false;
+        console.error('Error al cargar el contador de descargas', err);
+      }
     });
   }
 

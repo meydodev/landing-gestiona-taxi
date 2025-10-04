@@ -1,10 +1,10 @@
 
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { environment } from '../../environments/environment.development';
+import { environment } from '../../../environments/environment.development';
 import { HttpClient } from '@angular/common/http';
-import { DownloadCounter } from '../models/downlodas';
-import { Reviews } from '../models/reviews';
+import { DownloadCounter } from '../../models/downlodas';
+import { Reviews } from '../../models/reviews';
 import { Subject } from 'rxjs';
 
 
